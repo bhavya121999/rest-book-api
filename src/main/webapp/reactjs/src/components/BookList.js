@@ -22,9 +22,19 @@ findAllBooks(){
     		.then(response => response.data)
     		.then((data) => {
     			this.setState({books:data});
-    		})}
+    		})};
 
+deleteBook=(bookId) =>{
+axios.delete("http://localhost:8080/rest/books/"+bookId)
+.then(response => {
+if(response.data != null){
+alert("Book deleted successfully");
+this.setState({
+books:this.state.books.filter(book => book.id !==bookId)
+});
 
+}});
+};
 
 
 	render(){
@@ -65,7 +75,7 @@ findAllBooks(){
 
     <ButtonGroup>
     <Button size="sm" variant="outline-primary"><FontAwesomeIcon icon={faEdit} /></Button>{" "}
-    <Button size="sm" variant="outline-danger"><FontAwesomeIcon icon={faTrash} /></Button>
+    <Button size="sm" variant="outline-danger" onClick={this.deleteBook.bind(this,book.id)}><FontAwesomeIcon icon={faTrash} /></Button>
     </ButtonGroup>
 </td>
     </tr>
