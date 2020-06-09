@@ -1,7 +1,11 @@
 import React,{Component} from "react";
 import {Card,Form,Button,Col} from "react-bootstrap"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSave,faPlusSquare} from "@fortawesome/free-solid-svg-icons"
 
 export default class Book extends Component {
+
+
 
 constructor(props){
 	super(props);
@@ -12,25 +16,27 @@ constructor(props){
 }
 
 submitBook(event){
-	// alert(Title: "+this.state.title+", 
-	// 	Author: "+this.state.author+", 
-	// 	Cover Photo URL: "+this.state.coverphotoURL+", 
-	// 	ISBN Number: "this.state.isbnNumber+", 
-	// 	Price: "+this.state.price+", 
-	// 	Language: "+this.state.language+");
+	alert(
+		"Title: "+ this.state.title + 
+		" Author: "+this.state.author+ 
+		" Cover Photo URL: "+this.state.coverphotoURL+ 
+		" ISBN Number: "+this.state.isbnNumber+ 
+		" Price: "+this.state.price+ 
+		" Language: "+this.state.language);
+	
 	event.preventDefault();
 }
 
 bookChange(event){
 	this.setState({
-		[event.target.name]:event.target.name
+		[event.target.name]:event.target.value
 	})
 }
 
 render(){
 	return (
 		<Card className={"border border-dark bg-dark text-white"}>
-		<Card.Header>Add New Book</Card.Header>
+		<Card.Header><FontAwesomeIcon icon={faPlusSquare} />Add New Book</Card.Header>
 		<Form onSubmit={this.submitBook} id="bookFormId">
 		
 		<Card.Body>
@@ -114,7 +120,7 @@ render(){
         
         <Card.Footer style={{"textAlign":"right"}}>
 		<Button size="sm" variant="primary" type="submit">
-		Submit
+		<FontAwesomeIcon icon={faSave} />Submit
 		</Button>
 		</Card.Footer>
 

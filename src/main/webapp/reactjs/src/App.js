@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import {Container, Row, Jumbotron, Col} from "react-bootstrap"
+import {Container, Row, Col} from "react-bootstrap"
 import Navigation from "./components/Navigation"
 import Welcome from "./components/Welcome"
 
