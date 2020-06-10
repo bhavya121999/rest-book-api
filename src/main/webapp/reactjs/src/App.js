@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation"
 import Welcome from "./components/Welcome"
 
 import BookList from "./components/BookList"
+import UserList from "./components/UserList"
 import Book from "./components/Book"
 import Footer from "./components/Footer"
 import {BrowserRouter as Router, Switch,Route} from "react-router-dom"
@@ -28,6 +29,7 @@ marginTop:"20px"
 <Route path="/add" exact component={Book}/>
 <Route path="/edit/:id" exact component={Book}/>
 <Route path="/list" exact component={BookList}/>
+<Route path="/users" exact component={UserList}/>
 </Switch>
 </Col>
 
