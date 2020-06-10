@@ -26,6 +26,7 @@ marginTop:"20px"
 <Switch>
 <Route path="/" exact component={Welcome}/>
 <Route path="/add" exact component={Book}/>
+<Route path="/edit/:id" exact component={Book}/>
 <Route path="/list" exact component={BookList}/>
 </Switch>
 </Col>
