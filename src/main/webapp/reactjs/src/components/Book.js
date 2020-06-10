@@ -30,6 +30,28 @@ this.findBookById(bookId);
 }
 
 findBookById=(bookId)=>{
+fetch("http://localhost:8080/rest/books/"+bookId)
+.then(response => response.json())
+.then((book)=>{
+if(book){
+this.setState({
+id: book.id,
+title:book.title,
+author:book.author,
+coverphotoURL:book.coverphotoURL,
+isbnNumber:book.isbnNumber,
+price:book.price,
+language:book.language
+});
+}
+}).catch((error)=>{
+console.error("Error - "+error);
+});
+}
+
+
+
+/*findBookById=(bookId)=>{
 axios.get("http://localhost:8080/rest/books/"+bookId)
 .then(response=>{
 if(response.data!=null){
@@ -46,14 +68,16 @@ language:response.data.language
 }).catch((error)=>{
 console.error("Error - "+error);
 });
-}
+}*/
+
+
 
 
 resetBook=() => {
 this.setState(() => this.initialState)
 }
 
-submitBook= event =>{
+/*submitBook= event =>{
 event.preventDefault();
 
 	const book = {
@@ -81,9 +105,48 @@ event.preventDefault();
 	this.setState(this.initialState);
 	
 
+};*/
+
+
+submitBook= event =>{
+event.preventDefault();
+
+	const book = {
+
+	         title:  this.state.title,
+    		 author: this.state.author,
+    		 coverphotoURL: this.state.coverphotoURL,
+    		 isbnNumber: this.state.isbnNumber,
+    		 price: this.state.price,
+    		 language: this.state.language
+
+	};
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+	fetch("http://localhost:8080/rest/books",{
+	method:"POST",
+	body:JSON.stringify(book),
+	headers
+	})
+	.then(response => response.json())
+	.then((book) => {
+	if(book){
+	this.setState({"show":true, "method":"post"});
+	setTimeout(() => this.setState({"show":false}),3000);
+
+	}
+	else{
+	this.setState({"show":false});
+
+	}});
+	this.setState(this.initialState);
+
+
 };
 
-updateBook = event =>{
+/*updateBook = event =>{
 event.preventDefault();
 
 	const book = {
@@ -100,6 +163,43 @@ event.preventDefault();
 	axios.put("http://localhost:8080/rest/books",book)
 	.then(response => {
 	if(response.data!=null){
+	this.setState({"show":true, "method":"put"});
+	setTimeout(() => this.setState({"show":false}),3000);
+	setTimeout(() => this.bookList(),3000);
+	}
+	else{
+	this.setState({"show":false});
+
+	}});
+	this.setState(this.initialState);
+
+}*/
+
+updateBook = event =>{
+event.preventDefault();
+
+	const book = {
+	         id:this.state.id,
+	         title:  this.state.title,
+    		 author: this.state.author,
+    		 coverphotoURL: this.state.coverphotoURL,
+    		 isbnNumber: this.state.isbnNumber,
+    		 price: this.state.price,
+    		 language: this.state.language
+
+	};
+
+	const headers = new Headers();
+     headers.append("Content-Type", "application/json");
+
+	fetch("http://localhost:8080/rest/books",{
+                               method:"PUT",
+                               body:JSON.stringify(book),
+                               headers
+                               })
+    .then(response => response.json())
+	.then((book) => {
+	if(book){
 	this.setState({"show":true, "method":"put"});
 	setTimeout(() => this.setState({"show":false}),3000);
 	setTimeout(() => this.bookList(),3000);
